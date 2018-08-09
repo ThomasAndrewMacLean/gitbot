@@ -65,7 +65,13 @@ api.post('/webhook', function(req) {
                     'Content-Type': 'application/json',
                     Authorization: 'Bearer ' + process.env.githubToken
                 }
-            });
+            })
+                .then(d => {
+                    console.log(d);
+                })
+                .catch(err => {
+                    console.log(err);
+                });
 
             //  return { status: 'OK' };
         })

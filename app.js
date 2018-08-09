@@ -1,8 +1,9 @@
 const ApiBuilder = require('claudia-api-builder');
 const AWS = require('aws-sdk');
+//AWS.config.update({ region: 'eu-west-1' });
 
-const SES = new AWS.SES();
 const api = new ApiBuilder();
+const SES = new AWS.SES();
 
 const sender = 'thomas.maclean@gmail.com';
 const recipient = 'thomas.maclean@gmail.com';
@@ -13,10 +14,10 @@ api.get('/ping', function() {
 });
 
 api.post('/webhook', function(req) {
-    if (req.body.action !== 'opened') {
-        console.log('not an PR... will shut down');
-        return;
-    }
+    // if (req.body.action !== 'opened') {
+    console.log(`this is a ${req.body.action}not an PR... will shut down`);
+    // return;
+    //}
 
     let msg = '';
     for (const key in req.body) {
@@ -28,6 +29,23 @@ api.post('/webhook', function(req) {
         Destination: { ToAddresses: [recipient] },
         Message: { Subject: { Data: subject }, Body: { Text: { Data: msg } } }
     };
+
+    console.log('OK123');
+
+    // SES.sendEmail(email, (err, data) => {
+    //     if (err) console.log(err, err.stack);
+    //     else console.log(data);
+    // });
+    // const sendPromise = new AWS.SES({ apiVersion: '2010-12-01' }).sendEmail(email).promise();
+
+    // sendPromise
+    //     .then(function(data) {
+    //         console.log(data.MessageId);
+    //     })
+    //     .catch(function(err) {
+    //         console.error(err, err.stack);
+    //     });
+
     return SES.sendEmail(email)
         .promise()
         .then(function() {

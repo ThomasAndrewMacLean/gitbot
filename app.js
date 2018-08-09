@@ -21,12 +21,10 @@ api.get('/version', function() {
 api.post('/webhook', function(req) {
     console.log('STARTING WEBHOOK');
 
-    // let msg = '';
-    // for (const key in req.post) {
-    //     msg += key + ': ' + req.post[key] + '\n';
-    // }
-
-    const msg = 'hello';
+    let msg = '';
+    for (const key in req.post) {
+        msg += key + ': ' + req.post[key] + '\n';
+    }
 
     const email = {
         Source: sender,

@@ -1,5 +1,6 @@
 const ApiBuilder = require('claudia-api-builder');
 const AWS = require('aws-sdk');
+const fetch = require('node-fetch');
 
 const api = new ApiBuilder();
 const SES = new AWS.SES();
@@ -18,9 +19,20 @@ api.post('/webhook', function(req) {
         return;
     }
 
-    
+    const PR = req.body.pull_request;
 
+    if (PR && PR.labels.length !== 0) {
+        const url = PR.issue_url;
 
+        fetch(url, {
+            method: 'POST',
+            body: JSON.stringify(['bug', 'question']),
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + process.env.githubToken
+            }
+        });
+    }
 
     let msg = '';
     for (const key in req.body) {

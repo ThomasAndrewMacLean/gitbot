@@ -1,0 +1,11 @@
+{
+  "lambda": {
+    "role": "gitbot-executor",
+    "name": "gitbot",
+    "region": "eu-west-1"
+  },
+  "api": {
+    "id": "7uxwj0ehf4",
+    "module": "app"
+  }
+}

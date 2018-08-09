@@ -1,22 +1,25 @@
 {
-  "name": "gitbot",
-  "version": "1.0.0",
-  "description": "a gitbot to listen to webhooks and do stuff",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ThomasAndrewMacLean/gitbot.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/ThomasAndrewMacLean/gitbot/issues"
-  },
-  "homepage": "https://github.com/ThomasAndrewMacLean/gitbot#readme",
-  "dependencies": {
-    "claudia": "^5.1.0"
-  }
+    "name": "gitbot",
+    "version": "1.0.0",
+    "description": "a gitbot to listen to webhooks and do stuff",
+    "main": "app.js",
+    "scripts": {
+        "first-deploy": "claudia create --region eu-west-1 --api-module app --profile claudiaJS --policies policies",
+        "deploy": "claudia update --profile claudiaJS --policies policies",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ThomasAndrewMacLean/gitbot.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/ThomasAndrewMacLean/gitbot/issues"
+    },
+    "homepage": "https://github.com/ThomasAndrewMacLean/gitbot#readme",
+    "dependencies": {
+        "claudia": "^5.1.0",
+        "claudia-api-builder": "^4.1.1"
+    }
 }

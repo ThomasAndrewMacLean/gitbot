@@ -29,7 +29,6 @@ api.post('/webhook', function(req) {
         Message: { Subject: { Data: subject }, Body: { Text: { Data: msg } } }
     };
     return SES.sendEmail(email)
-        .promise()
         .then(function() {
             console.log('it went ok');
 

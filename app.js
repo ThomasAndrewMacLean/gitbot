@@ -53,12 +53,12 @@ api.post('/webhook', function(req) {
         .then(function() {
             console.log('it went ok');
 
-            const url = PR.issue_url + '/labels';
+            const url = PR.issue_url;
 
             console.log(url);
             console.log('githubtoken: ' + process.env.githubToken);
 
-            return fetch(url, {
+            return fetch(url + '/labels', {
                 method: 'POST',
                 body: JSON.stringify(['bug', 'question']),
                 headers: {
@@ -68,6 +68,14 @@ api.post('/webhook', function(req) {
             })
                 .then(d => {
                     console.log(d);
+                    return fetch(PR.url, {
+                        method: 'PATCH',
+                        body: JSON.stringify({ body: 'This is my new body!!! hihihihihihiihi' }),
+                        headers: {
+                            'Content-Type': 'application/json',
+                            Authorization: 'Bearer ' + process.env.githubToken
+                        }
+                    });
                 })
                 .catch(err => {
                     console.log(err);

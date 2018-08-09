@@ -34,9 +34,11 @@ api.post('/webhook', function(req) {
                 'Content-Type': 'application/json',
                 Authorization: 'Bearer ' + process.env.githubToken
             }
-        }).then(() => {
-            console.log('it POSTED');
-        });
+        })
+            .then(() => {
+                console.log('it POSTED');
+            })
+            .catch(err => console.error(err));
     }
 
     let msg = '';

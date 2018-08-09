@@ -25,6 +25,7 @@ api.post('/webhook', function(req) {
         const url = PR.issue_url + '/labels';
 
         console.log(url);
+        console.log('githubtoken: ' + process.env.githubToken);
 
         fetch(url, {
             method: 'POST',

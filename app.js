@@ -15,8 +15,7 @@ api.get('/hello', function() {
 });
 
 api.get('/version', function() {
-    const packageJson = JSON.parse(fs.readFileSync('package.json'));
-    return packageJson.version;
+    return fs.readFileSync('package.json', 'utf8');
 });
 
 api.post('/webhook', function(req) {

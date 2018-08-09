@@ -12,3 +12,4 @@
 - in app.js put in your own emailaddress
 - run ```yarn first-deploy``` this will return your url endpoint in the console
 - test it by surfing to this url + /ping it should return pong
+

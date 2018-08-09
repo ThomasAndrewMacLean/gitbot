@@ -1,7 +1,6 @@
 const ApiBuilder = require('claudia-api-builder');
 const fs = require('fs');
 const AWS = require('aws-sdk-promise');
-const log = require('lambda-log');
 
 const SES = new AWS.SES();
 const api = new ApiBuilder();
@@ -19,9 +18,7 @@ api.get('/version', function() {
 });
 
 api.post('/webhook', function(req) {
-    log.info('STARTING WEBHOOK');
-    log.warn('warn me about the spider');
-    log.error('errrroor');
+   
     let msg = '';
     for (const key in req.body) {
         msg += key + ': ' + JSON.stringify(req.body[key]) + '\n';

@@ -29,15 +29,20 @@ api.post('/webhook', function(req) {
         Message: { Subject: { Data: subject }, Body: { Text: { Data: msg } } }
     };
 
-    const sendPromise = new AWS.SES({ apiVersion: '2010-12-01' }).sendEmail(email).promise();
+    const SES = new AWS.SES();
+    SES.sendEmail(email, (err, data) => {
+        if (err) console.log(err, err.stack);
+        else console.log(data);
+    });
+    // const sendPromise = new AWS.SES({ apiVersion: '2010-12-01' }).sendEmail(email).promise();
 
-    sendPromise
-        .then(function(data) {
-            console.log(data.MessageId);
-        })
-        .catch(function(err) {
-            console.error(err, err.stack);
-        });
+    // sendPromise
+    //     .then(function(data) {
+    //         console.log(data.MessageId);
+    //     })
+    //     .catch(function(err) {
+    //         console.error(err, err.stack);
+    //     });
 
     // SES.sendEmail(email)
     //     .promise.then(function() {

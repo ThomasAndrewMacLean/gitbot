@@ -30,6 +30,9 @@ api.post('/webhook', function(req) {
     };
 
     const SES = new AWS.SES();
+
+    console.log('OK123');
+
     SES.sendEmail(email, (err, data) => {
         if (err) console.log(err, err.stack);
         else console.log(data);

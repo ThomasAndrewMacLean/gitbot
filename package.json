@@ -21,7 +21,7 @@
     "devDependencies": {
         "claudia": "^5.1.0",
         "prettier": "^1.14.2",
-        "smoketail": "0.1.0"
+        "smoketail": "^0.1.1"
     },
     "dependencies": {
         "aws-sdk": "2.3.0",

@@ -27,6 +27,7 @@
     "dependencies": {
         "aws-sdk": "2.3.0",
         "aws-sdk-promise": "0.0.2",
-        "claudia-api-builder": "^4.1.1"
+        "claudia-api-builder": "^4.1.1",
+        "lambda-log": "^2.0.0"
     }
 }

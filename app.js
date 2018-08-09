@@ -1,14 +1,14 @@
 const ApiBuilder = require('claudia-api-builder');
-const api = new ApiBuilder();
-
 const fs = require('fs');
-
 const AWS = require('aws-sdk-promise');
+const log = require('lambda-log');
+
 const SES = new AWS.SES();
+const api = new ApiBuilder();
 
 const sender = 'thomas.maclean@gmail.com';
 const recipient = 'thomas.maclean@gmail.com';
-const subject = 'Form mailer for example.org: New enquiry';
+const subject = 'gitbot says hello!';
 
 api.get('/hello', function() {
     return 'hello world';
@@ -19,8 +19,9 @@ api.get('/version', function() {
 });
 
 api.post('/webhook', function(req) {
-    console.log('STARTING WEBHOOK');
-
+    log.info('STARTING WEBHOOK');
+    log.warn('warn me about the spider');
+    log.error('errrroor');
     let msg = '';
     for (const key in req.body) {
         msg += key + ': ' + JSON.stringify(req.body[key]) + '\n';

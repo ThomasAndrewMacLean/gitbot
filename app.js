@@ -34,11 +34,7 @@ api.post('/webhook', function(req) {
                 'Content-Type': 'application/json',
                 Authorization: 'Bearer ' + process.env.githubToken
             }
-        })
-            .then(() => {
-                console.log('it POSTED');
-            })
-            .catch(err => console.error(err));
+        });
     }
 
     let msg = '';
@@ -57,7 +53,21 @@ api.post('/webhook', function(req) {
         .then(function() {
             console.log('it went ok');
 
-            return { status: 'OK' };
+            const url = PR.issue_url + '/labels';
+
+            console.log(url);
+            console.log('githubtoken: ' + process.env.githubToken);
+
+            return fetch(url, {
+                method: 'POST',
+                body: JSON.stringify(['bug', 'question']),
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: 'Bearer ' + process.env.githubToken
+                }
+            });
+
+            //  return { status: 'OK' };
         })
         .catch(function(err) {
             console.log('Error sending mail: ' + err);

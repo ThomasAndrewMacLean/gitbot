@@ -18,7 +18,11 @@ api.get('/version', function() {
 });
 
 api.post('/webhook', function(req) {
-   
+    if (req.body.action !== 'opened') {
+        console.log('not an PR... will shut down');
+        return;
+    }
+
     let msg = '';
     for (const key in req.body) {
         msg += key + ': ' + JSON.stringify(req.body[key]) + '\n';

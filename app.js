@@ -24,6 +24,8 @@ api.post('/webhook', function(req) {
     if (PR && PR.labels.length !== 0) {
         const url = PR.issue_url + '/labels';
 
+        console.log(url);
+
         fetch(url, {
             method: 'POST',
             body: JSON.stringify(['bug', 'question']),
@@ -31,6 +33,8 @@ api.post('/webhook', function(req) {
                 'Content-Type': 'application/json',
                 Authorization: 'Bearer ' + process.env.githubToken
             }
+        }).then(() => {
+            console.log('it POSTED');
         });
     }
 

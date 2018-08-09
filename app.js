@@ -28,6 +28,7 @@ api.post('/webhook', function(req) {
         Destination: { ToAddresses: [recipient] },
         Message: { Subject: { Data: subject }, Body: { Text: { Data: msg } } }
     };
+    
 
     const SES = new AWS.SES();
 

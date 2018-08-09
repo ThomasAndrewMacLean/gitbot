@@ -46,7 +46,7 @@ api.post('/webhook', function(req) {
     //         console.error(err, err.stack);
     //     });
 
-    SES.sendEmail(email)
+    return SES.sendEmail(email)
         .promise()
         .then(function() {
             console.log('it went ok');

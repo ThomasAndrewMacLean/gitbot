@@ -1,6 +1,5 @@
 const ApiBuilder = require('claudia-api-builder');
-const fs = require('fs');
-const AWS = require('aws-sdk-promise');
+const AWS = require('aws-sdk');
 
 const SES = new AWS.SES();
 const api = new ApiBuilder();
@@ -9,12 +8,8 @@ const sender = 'thomas.maclean@gmail.com';
 const recipient = 'thomas.maclean@gmail.com';
 const subject = 'gitbot says hello!';
 
-api.get('/hello', function() {
-    return 'hello world';
-});
-
-api.get('/version', function() {
-    return fs.readFileSync('package.json', 'utf8');
+api.get('/ping', function() {
+    return 'pong';
 });
 
 api.post('/webhook', function(req) {
@@ -36,6 +31,8 @@ api.post('/webhook', function(req) {
     return SES.sendEmail(email)
         .promise()
         .then(function() {
+            console.log('it went ok');
+
             return { status: 'OK' };
         })
         .catch(function(err) {

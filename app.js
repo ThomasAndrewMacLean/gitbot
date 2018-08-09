@@ -21,7 +21,7 @@ api.post('/webhook', function(req) {
 
     const PR = req.body.pull_request;
 
-    if (PR && PR.labels.length !== 0) {
+    if (PR && PR.labels.length === 0) {
         const url = PR.issue_url + '/labels';
 
         console.log(url);

@@ -5,7 +5,7 @@
     "main": "app.js",
     "scripts": {
         "first-deploy": "claudia create --region eu-west-1 --api-module app --profile claudiaJS --policies policies",
-        "deploy": "claudia update --profile claudiaJS --policies policies",
+        "deploy": "claudia update --profile claudiaJS",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {
@@ -19,13 +19,13 @@
     },
     "homepage": "https://github.com/ThomasAndrewMacLean/gitbot#readme",
     "devDependencies": {
-        "claudia": "1.1.2",
+        "claudia": "^5.1.0",
         "prettier": "^1.14.2",
         "smoketail": "0.1.0"
     },
     "dependencies": {
         "aws-sdk": "2.3.0",
         "aws-sdk-promise": "0.0.2",
-        "claudia-api-builder": "1.1.0"
+        "claudia-api-builder": "^4.1.1"
     }
 }

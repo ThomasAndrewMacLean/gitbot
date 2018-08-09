@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/Cellar/yarn/1.5.1_1/libexec/bin/yarn.js first-deploy
+  /usr/local/bin/node /usr/local/Cellar/yarn/1.5.1_1/libexec/bin/yarn.js deploy
 
 PATH: 
   /Users/tmacair/Documents/google-cloud-sdk/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/tmacair/Library/Python/2.7/bin/aws:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/tmacair/Documents/google-cloud-sdk/bin
@@ -21,7 +21,7 @@ npm manifest:
       "main": "app.js",
       "scripts": {
           "first-deploy": "claudia create --region eu-west-1 --api-module app --profile claudiaJS --policies policies",
-          "deploy": "claudia update --profile claudiaJS --policies policies",
+          "deploy": "claudia update --profile claudiaJS",
           "test": "echo \"Error: no test specified\" && exit 1"
       },
       "repository": {
@@ -34,9 +34,15 @@ npm manifest:
           "url": "https://github.com/ThomasAndrewMacLean/gitbot/issues"
       },
       "homepage": "https://github.com/ThomasAndrewMacLean/gitbot#readme",
-      "dependencies": {
+      "devDependencies": {
           "claudia": "^5.1.0",
-          "claudia-api-builder": "^4.1.1"
+          "prettier": "^1.14.2",
+          "smoketail": "0.1.0"
+      },
+      "dependencies": {
+          "aws-sdk": "2.3.0",
+          "aws-sdk-promise": "0.0.2",
+          "claudia-api-builder": "1.1.0"
       }
   }
 
@@ -78,13 +84,32 @@ Lockfile:
       tar-stream "^1.5.0"
       zip-stream "^1.2.0"
   
+  asap@~1.0.0:
+    version "1.0.0"
+    resolved "https://registry.yarnpkg.com/asap/-/asap-1.0.0.tgz#b2a45da5fdfa20b0496fc3768cc27c12fa916a7d"
+  
   async@^2.0.0:
     version "2.6.1"
     resolved "https://registry.yarnpkg.com/async/-/async-2.6.1.tgz#b245a23ca71930044ec53fa46aa00a3e87c6a610"
     dependencies:
       lodash "^4.17.10"
   
-  aws-sdk@^2.251.1:
+  aws-sdk-promise@0.0.2:
+    version "0.0.2"
+    resolved "https://registry.yarnpkg.com/aws-sdk-promise/-/aws-sdk-promise-0.0.2.tgz#2886bd1fc4c47ebcb9afdd6c597cf4260fb9e5e8"
+    dependencies:
+      promise "^6.1.0"
+  
+  aws-sdk@2.3.0:
+    version "2.3.0"
+    resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.3.0.tgz#96c653063863e2b7df34f6ab160f89f9c90b6a7b"
+    dependencies:
+      jmespath "0.15.0"
+      sax "1.1.5"
+      xml2js "0.4.15"
+      xmlbuilder "2.6.2"
+  
+  aws-sdk@^2.2.14, aws-sdk@^2.251.1:
     version "2.289.0"
     resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.289.0.tgz#8921765288526db81d7fe0bda5dba3e29c15218e"
     dependencies:
@@ -168,9 +193,9 @@ Lockfile:
     version "1.0.1"
     resolved "https://registry.yarnpkg.com/chownr/-/chownr-1.0.1.tgz#e2a75042a9551908bebd25b8523d5f9769d79181"
   
-  claudia-api-builder@^4.1.1:
-    version "4.1.1"
-    resolved "https://registry.yarnpkg.com/claudia-api-builder/-/claudia-api-builder-4.1.1.tgz#9198280c6f5ef19a5fceadf716a819f1d6fc5ce0"
+  claudia-api-builder@1.1.0:
+    version "1.1.0"
+    resolved "https://registry.yarnpkg.com/claudia-api-builder/-/claudia-api-builder-1.1.0.tgz#e5c8ed647c7e227779002f37c529c8bb829da574"
   
   claudia@^5.1.0:
     version "5.1.0"
@@ -189,6 +214,12 @@ Lockfile:
       tar-fs "^1.14.0"
       uuid "^2.0.1"
       which "^1.3.1"
+  
+  commander@~2.9.0:
+    version "2.9.0"
+    resolved "https://registry.yarnpkg.com/commander/-/commander-2.9.0.tgz#9c99094176e12240cb22d6c5146098400fe0f7d4"
+    dependencies:
+      graceful-readlink ">= 1.0.0"
   
   compress-commons@^1.2.0:
     version "1.2.2"
@@ -286,6 +317,10 @@ Lockfile:
     version "4.1.11"
     resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.1.11.tgz#0e8bdfe4d1ddb8854d64e04ea7c00e2a026e5658"
   
+  "graceful-readlink@>= 1.0.0":
+    version "1.0.1"
+    resolved "https://registry.yarnpkg.com/graceful-readlink/-/graceful-readlink-1.0.1.tgz#4cafad76bc62f02fa039b2f94e9a3dd3a391a725"
+  
   gunzip-maybe@^1.4.0:
     version "1.4.1"
     resolved "https://registry.yarnpkg.com/gunzip-maybe/-/gunzip-maybe-1.4.1.tgz#39c72ed89d1b49ba708e18776500488902a52027"
@@ -359,6 +394,10 @@ Lockfile:
     version "4.17.10"
     resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.10.tgz#1b7793cf7259ea38fb3661d4d38b3260af8ae4e7"
   
+  lodash@~3.5.0:
+    version "3.5.0"
+    resolved "https://registry.yarnpkg.com/lodash/-/lodash-3.5.0.tgz#19bb3f4d51278f0b8c818ed145c74ecf9fe40e6d"
+  
   minimal-request-promise@^1.1.0:
     version "1.5.0"
     resolved "https://registry.yarnpkg.com/minimal-request-promise/-/minimal-request-promise-1.5.0.tgz#60f5d7f55b4026d197074e2e155626d4cc5c2ebc"
@@ -419,9 +458,19 @@ Lockfile:
       duplexify "^3.5.0"
       through2 "^2.0.3"
   
+  prettier@^1.14.2:
+    version "1.14.2"
+    resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.14.2.tgz#0ac1c6e1a90baa22a62925f41963c841983282f9"
+  
   process-nextick-args@~2.0.0:
     version "2.0.0"
     resolved "https://registry.yarnpkg.com/process-nextick-args/-/process-nextick-args-2.0.0.tgz#a37d732f4271b4ab1ad070d35508e8290788ffaa"
+  
+  promise@^6.1.0:
+    version "6.1.0"
+    resolved "https://registry.yarnpkg.com/promise/-/promise-6.1.0.tgz#2ce729f6b94b45c26891ad0602c5c90e04c6eef6"
+    dependencies:
+      asap "~1.0.0"
   
   pump@^1.0.0:
     version "1.0.3"
@@ -449,6 +498,10 @@ Lockfile:
     version "1.3.2"
     resolved "https://registry.yarnpkg.com/punycode/-/punycode-1.3.2.tgz#9653a036fb7c1ee42342f2325cceefea3926c48d"
   
+  q@^1.4.1:
+    version "1.5.1"
+    resolved "https://registry.yarnpkg.com/q/-/q-1.5.1.tgz#7e32f75b41381291d04611f1bf14109ac00651d7"
+  
   querystring@0.2.0:
     version "0.2.0"
     resolved "https://registry.yarnpkg.com/querystring/-/querystring-0.2.0.tgz#b209849203bb25df820da756e747005878521620"
@@ -473,6 +526,10 @@ Lockfile:
     version "5.1.2"
     resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.2.tgz#991ec69d296e0313747d59bdfd2b745c35f8828d"
   
+  sax@1.1.5:
+    version "1.1.5"
+    resolved "https://registry.yarnpkg.com/sax/-/sax-1.1.5.tgz#1da50a8d00cdecd59405659f5ff85349fe773743"
+  
   sax@1.2.1:
     version "1.2.1"
     resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.1.tgz#7b8e656190b228e81a66aea748480d828cd2d37a"
@@ -484,6 +541,14 @@ Lockfile:
   sequential-promise-map@^1.0.0:
     version "1.0.4"
     resolved "https://registry.yarnpkg.com/sequential-promise-map/-/sequential-promise-map-1.0.4.tgz#ebe4a5c8f985e720dc8f2055545a76c78c451b05"
+  
+  smoketail@0.1.0:
+    version "0.1.0"
+    resolved "https://registry.yarnpkg.com/smoketail/-/smoketail-0.1.0.tgz#c55ef0fd99f4ef9e8baffa318ad81e0bd9082f84"
+    dependencies:
+      aws-sdk "^2.2.14"
+      commander "~2.9.0"
+      q "^1.4.1"
   
   stream-shift@^1.0.0:
     version "1.0.0"
@@ -560,12 +625,29 @@ Lockfile:
     version "1.0.2"
     resolved "https://registry.yarnpkg.com/wrappy/-/wrappy-1.0.2.tgz#b5243d8f3ec1aa35f1364605bc0d1036e30ab69f"
   
+  xml2js@0.4.15:
+    version "0.4.15"
+    resolved "https://registry.yarnpkg.com/xml2js/-/xml2js-0.4.15.tgz#95cd03ff2dd144ec28bc6273bf2b2890c581ad0c"
+    dependencies:
+      sax ">=0.6.0"
+      xmlbuilder ">=2.4.6"
+  
   xml2js@0.4.19:
     version "0.4.19"
     resolved "https://registry.yarnpkg.com/xml2js/-/xml2js-0.4.19.tgz#686c20f213209e94abf0d1bcf1efaa291c7827a7"
     dependencies:
       sax ">=0.6.0"
       xmlbuilder "~9.0.1"
+  
+  xmlbuilder@2.6.2:
+    version "2.6.2"
+    resolved "https://registry.yarnpkg.com/xmlbuilder/-/xmlbuilder-2.6.2.tgz#f916f6d10d45dc171b1be2e6e673fb6e0cc35d0a"
+    dependencies:
+      lodash "~3.5.0"
+  
+  xmlbuilder@>=2.4.6:
+    version "10.0.0"
+    resolved "https://registry.yarnpkg.com/xmlbuilder/-/xmlbuilder-10.0.0.tgz#c64e52f8ae097fe5fd46d1c38adaade071ee1b55"
   
   xmlbuilder@~9.0.1:
     version "9.0.7"
@@ -588,7 +670,7 @@ Trace:
   Error: Command failed.
   Exit code: 1
   Command: sh
-  Arguments: -c claudia create --region eu-west-1 --api-module app --profile claudiaJS --policies policies
+  Arguments: -c claudia update --profile claudiaJS
   Directory: /Users/tmacair/Projects/gitBot
   Output:
   

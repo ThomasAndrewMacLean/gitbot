@@ -6,7 +6,7 @@ const fs = require('fs');
 const AWS = require('aws-sdk-promise');
 const SES = new AWS.SES();
 
-const sender = 'Spinscale Form Mailer hello@thomasmaclean.be';
+const sender = 'thomas.maclean@gmail.com';
 const recipient = 'thomas.maclean@gmail.com';
 const subject = 'Form mailer for example.org: New enquiry';
 
@@ -19,10 +19,14 @@ api.get('/version', function() {
 });
 
 api.post('/webhook', function(req) {
-    let msg = '';
-    for (const key in req.post) {
-        msg += key + ': ' + req.post[key] + '\n';
-    }
+    console.log('STARTING WEBHOOK');
+
+    // let msg = '';
+    // for (const key in req.post) {
+    //     msg += key + ': ' + req.post[key] + '\n';
+    // }
+
+    const msg = 'hello';
 
     const email = {
         Source: sender,

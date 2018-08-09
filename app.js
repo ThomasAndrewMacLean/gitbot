@@ -13,10 +13,10 @@ api.get('/ping', function() {
 });
 
 api.post('/webhook', function(req) {
-    if (req.body.action !== 'opened') {
-        console.log('not an PR... will shut down');
-        return;
-    }
+    // if (req.body.action !== 'opened') {
+    console.log(`this is a ${req.body.action}not an PR... will shut down`);
+    // return;
+    //}
 
     let msg = '';
     for (const key in req.body) {
@@ -28,8 +28,8 @@ api.post('/webhook', function(req) {
         Destination: { ToAddresses: [recipient] },
         Message: { Subject: { Data: subject }, Body: { Text: { Data: msg } } }
     };
-    return SES.sendEmail(email)
-        .then(function() {
+    SES.sendEmail(email)
+        .promise.then(function() {
             console.log('it went ok');
 
             return { status: 'OK' };

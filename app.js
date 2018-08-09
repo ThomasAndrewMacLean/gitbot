@@ -15,27 +15,11 @@ api.get('/ping', function() {
 
 api.post('/webhook', function(req) {
     if (req.body.action !== 'opened') {
-        console.log(`this is a ${req.body.action}, not an PR... will shut down`);
+        console.log(`this is a ${req.body.action}, not a new PR... will shut down`);
         return;
     }
 
     const PR = req.body.pull_request;
-
-    if (PR && PR.labels.length === 0) {
-        const url = PR.issue_url + '/labels';
-
-        console.log(url);
-        console.log('githubtoken: ' + process.env.githubToken);
-
-        fetch(url, {
-            method: 'POST',
-            body: JSON.stringify(['bug', 'question']),
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: 'Bearer ' + process.env.githubToken
-            }
-        });
-    }
 
     let msg = '';
     for (const key in req.body) {
@@ -51,14 +35,7 @@ api.post('/webhook', function(req) {
     return SES.sendEmail(email)
         .promise()
         .then(function() {
-            console.log('it went ok');
-
-            const url = PR.issue_url;
-
-            console.log(url);
-            console.log('githubtoken: ' + process.env.githubToken);
-
-            return fetch(url + '/labels', {
+            return fetch(PR.issue_url + '/labels', {
                 method: 'POST',
                 body: JSON.stringify(['bug', 'question']),
                 headers: {
@@ -80,8 +57,6 @@ api.post('/webhook', function(req) {
                 .catch(err => {
                     console.log(err);
                 });
-
-            //  return { status: 'OK' };
         })
         .catch(function(err) {
             console.log('Error sending mail: ' + err);

@@ -22,8 +22,8 @@ api.post('/webhook', function(req) {
     console.log('STARTING WEBHOOK');
 
     let msg = '';
-    for (const key in req.post) {
-        msg += key + ': ' + req.post[key] + '\n';
+    for (const key in req.body) {
+        msg += key + ': ' + req.body[key] + '\n';
     }
 
     const email = {

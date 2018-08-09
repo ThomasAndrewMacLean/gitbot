@@ -1,8 +1,9 @@
 const ApiBuilder = require('claudia-api-builder');
 const AWS = require('aws-sdk');
-AWS.config.update({ region: 'eu-west-1' });
+//AWS.config.update({ region: 'eu-west-1' });
 
 const api = new ApiBuilder();
+const SES = new AWS.SES();
 
 const sender = 'thomas.maclean@gmail.com';
 const recipient = 'thomas.maclean@gmail.com';
@@ -28,16 +29,13 @@ api.post('/webhook', function(req) {
         Destination: { ToAddresses: [recipient] },
         Message: { Subject: { Data: subject }, Body: { Text: { Data: msg } } }
     };
-    
-
-    const SES = new AWS.SES();
 
     console.log('OK123');
 
-    SES.sendEmail(email, (err, data) => {
-        if (err) console.log(err, err.stack);
-        else console.log(data);
-    });
+    // SES.sendEmail(email, (err, data) => {
+    //     if (err) console.log(err, err.stack);
+    //     else console.log(data);
+    // });
     // const sendPromise = new AWS.SES({ apiVersion: '2010-12-01' }).sendEmail(email).promise();
 
     // sendPromise
@@ -48,16 +46,17 @@ api.post('/webhook', function(req) {
     //         console.error(err, err.stack);
     //     });
 
-    // SES.sendEmail(email)
-    //     .promise.then(function() {
-    //         console.log('it went ok');
+    SES.sendEmail(email)
+        .promise()
+        .then(function() {
+            console.log('it went ok');
 
-    //         return { status: 'OK' };
-    //     })
-    //     .catch(function(err) {
-    //         console.log('Error sending mail: ' + err);
-    //         return { status: 'ERROR' };
-    //     });
+            return { status: 'OK' };
+        })
+        .catch(function(err) {
+            console.log('Error sending mail: ' + err);
+            return { status: 'ERROR' };
+        });
 });
 
 module.exports = api;

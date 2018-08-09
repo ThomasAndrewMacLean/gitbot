@@ -1,7 +1,7 @@
 const ApiBuilder = require('claudia-api-builder');
 const AWS = require('aws-sdk');
+AWS.config.update({ region: 'eu-west-1' });
 
-const SES = new AWS.SES();
 const api = new ApiBuilder();
 
 const sender = 'thomas.maclean@gmail.com';
@@ -28,16 +28,27 @@ api.post('/webhook', function(req) {
         Destination: { ToAddresses: [recipient] },
         Message: { Subject: { Data: subject }, Body: { Text: { Data: msg } } }
     };
-    SES.sendEmail(email)
-        .promise.then(function() {
-            console.log('it went ok');
 
-            return { status: 'OK' };
+    const sendPromise = new AWS.SES({ apiVersion: '2010-12-01' }).sendEmail(email).promise();
+
+    sendPromise
+        .then(function(data) {
+            console.log(data.MessageId);
         })
         .catch(function(err) {
-            console.log('Error sending mail: ' + err);
-            return { status: 'ERROR' };
+            console.error(err, err.stack);
         });
+
+    // SES.sendEmail(email)
+    //     .promise.then(function() {
+    //         console.log('it went ok');
+
+    //         return { status: 'OK' };
+    //     })
+    //     .catch(function(err) {
+    //         console.log('Error sending mail: ' + err);
+    //         return { status: 'ERROR' };
+    //     });
 });
 
 module.exports = api;

@@ -1,12 +1,44 @@
-var ApiBuilder = require('claudia-api-builder'),
-  api = new ApiBuilder();
+const ApiBuilder = require('claudia-api-builder');
+const api = new ApiBuilder();
 
-module.exports = api;
+const fs = require('fs');
 
-api.get('/hello', function () {
-  return 'hello world';
+const AWS = require('aws-sdk-promise');
+const SES = new AWS.SES();
+
+const sender = 'Spinscale Form Mailer hello@thomasmaclean.be';
+const recipient = 'thomas.maclean@gmail.com';
+const subject = 'Form mailer for example.org: New enquiry';
+
+api.get('/hello', function() {
+    return 'hello world';
 });
 
-api.post('/webhook', function () {
-    return 'hello world';
-  });
+api.get('/version', function() {
+    const packageJson = JSON.parse(fs.readFileSync('package.json'));
+    return packageJson.version;
+});
+
+api.post('/webhook', function(req) {
+    let msg = '';
+    for (const key in req.post) {
+        msg += key + ': ' + req.post[key] + '\n';
+    }
+
+    const email = {
+        Source: sender,
+        Destination: { ToAddresses: [recipient] },
+        Message: { Subject: { Data: subject }, Body: { Text: { Data: msg } } }
+    };
+    return SES.sendEmail(email)
+        .promise()
+        .then(function() {
+            return { status: 'OK' };
+        })
+        .catch(function(err) {
+            console.log('Error sending mail: ' + err);
+            return { status: 'ERROR' };
+        });
+});
+
+module.exports = api;

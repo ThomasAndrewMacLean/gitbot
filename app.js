@@ -23,7 +23,7 @@ api.post('/webhook', function(req) {
 
     let msg = '';
     for (const key in req.body) {
-        msg += key + ': ' + req.body[key] + '\n';
+        msg += key + ': ' + JSON.stringify(req.body[key]) + '\n';
     }
 
     const email = {

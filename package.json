@@ -5,7 +5,7 @@
     "main": "app.js",
     "scripts": {
         "first-deploy": "claudia create --region eu-west-1 --api-module app --profile claudiaJS --policies policies",
-        "deploy": "claudia update --profile claudiaJS",
+        "deploy": "claudia update",
         "log": "smoketail -f /aws/lambda/gitbot -r eu-west-1",
         "test": "echo \"Error: no test specified\" && exit 1"
     },

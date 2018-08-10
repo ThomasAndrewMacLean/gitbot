@@ -45,9 +45,13 @@ api.post('/webhook', function(req) {
             })
                 .then(d => {
                     console.log(d);
+                    PR.body = PR.body.replace('test', 'production');
+
                     return fetch(PR.url, {
                         method: 'PATCH',
-                        body: JSON.stringify({ body: 'This is my new body!!! hihihihihihiihi' }),
+                        body: JSON.stringify({
+                            body: PR.body + '\n\n\n\n I can append this to the original body'
+                        }),
                         headers: {
                             'Content-Type': 'application/json',
                             Authorization: 'Bearer ' + process.env.githubToken

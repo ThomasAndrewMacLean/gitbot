@@ -72,7 +72,7 @@ const setBody = PR => {
         }),
         headers: {
             'Content-Type': 'application/json',
-            Authorization: 'Bearer ' + process.env.githubToken
+            Authorization: 'Bearer ' + process.env.GITHUBTOKEN
         }
     })
         .then(() => {

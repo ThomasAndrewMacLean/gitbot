@@ -40,7 +40,7 @@ api.post('/webhook', function(req) {
                 body: JSON.stringify(['bug', 'question']),
                 headers: {
                     'Content-Type': 'application/json',
-                    Authorization: 'Bearer ' + process.env.githubToken
+                    Authorization: 'Bearer ' + process.env.GITHUBTOKEN
                 }
             })
                 .then(d => {

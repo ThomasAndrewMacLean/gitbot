@@ -10,7 +10,11 @@ const sender = 'thomas.maclean@gmail.com';
 const recipient = 'thomas.maclean@gmail.com';
 const subject = 'gitbot says hello!';
 
-const verify = (signature, payload, secret) => {
+const verify = req => {
+    const secret = process.env.GITWEBHOOKSECRET;
+    const payload = JSON.stringify(req.body);
+    const signature = req.headers['X-Hub-Signature'];
+
     const computedSignature = `sha1=${crypto
         .createHmac('sha1', secret)
         .update(payload)
@@ -21,20 +25,9 @@ const verify = (signature, payload, secret) => {
 api.get('/ping', () => {
     return 'pong';
 });
-api.get('/test', req => {
-    return verify(
-        req.headers['x-hub-signature'],
-        JSON.stringify(req.body),
-        process.env.GITWEBHOOKSECRET
-    );
-});
 
 api.post('/webhook', req => {
-    console.log(req.headers['X-Hub-Signature']);
-
-    if (
-        !verify(req.headers['X-Hub-Signature'], JSON.stringify(req.body), process.env.GITWEBHOOKSECRET)
-    ) {
+    if (!verify(req)) {
         console.log('NOT SIGNED!');
         return;
     }

@@ -1,8 +1,8 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/Cellar/yarn/1.5.1_1/libexec/bin/yarn.js deploy
+  /usr/local/bin/node /usr/local/Cellar/yarn/1.5.1_1/libexec/bin/yarn.js deploy -q
 
 PATH: 
-  /Users/tmacair/Documents/google-cloud-sdk/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/tmacair/Library/Python/2.7/bin/aws:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/tmacair/Documents/google-cloud-sdk/bin
+  /usr/local/lib/node_modules/npm/node_modules/npm-lifecycle/node-gyp-bin:/Users/tmacair/Projects/gitBot/node_modules/.bin:/Library/Developer/CommandLineTools/usr/libexec/git-core:/Users/tmacair/Documents/google-cloud-sdk/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/tmacair/Library/Python/2.7/bin/aws:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/usr/local/bin:/usr/local
 
 Yarn version: 
   1.5.1
@@ -21,7 +21,7 @@ npm manifest:
       "main": "app.js",
       "scripts": {
           "first-deploy": "claudia create --region eu-west-1 --api-module app --profile claudiaJS --policies policies",
-          "deploy": "claudia update --set-env-from-json .env",
+          "deploy": "claudia update --set-env-from-json .env.json",
           "log": "smoketail -f /aws/lambda/gitbot -r eu-west-1",
           "test": "echo \"Error: no test specified\" && exit 1",
           "precommit": "yarn deploy -q"
@@ -45,6 +45,7 @@ npm manifest:
       "dependencies": {
           "aws-sdk": "^2.289.0",
           "claudia-api-builder": "^4.1.1",
+          "crypto": "^1.0.1",
           "node-fetch": "^2.2.0"
       }
   }
@@ -238,6 +239,10 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/crc/-/crc-3.8.0.tgz#ad60269c2c856f8c299e2c4cc0de4556914056c6"
     dependencies:
       buffer "^5.1.0"
+  
+  crypto@^1.0.1:
+    version "1.0.1"
+    resolved "https://registry.yarnpkg.com/crypto/-/crypto-1.0.1.tgz#2af1b7cad8175d24c8a1b0778255794a21803037"
   
   debug@^3.1.0:
     version "3.1.0"
@@ -653,7 +658,7 @@ Trace:
   Error: Command failed.
   Exit code: 1
   Command: sh
-  Arguments: -c claudia update --set-env-from-json .env
+  Arguments: -c claudia update --set-env-from-json .env.json -q
   Directory: /Users/tmacair/Projects/gitBot
   Output:
   

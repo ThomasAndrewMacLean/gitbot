@@ -1,26 +1,13 @@
 const ApiBuilder = require('claudia-api-builder');
 const AWS = require('aws-sdk');
 const fetch = require('node-fetch');
-const crypto = require('crypto');
-
+const verify = require('./security/verify');
 const api = new ApiBuilder();
 const SES = new AWS.SES();
 
 const sender = 'thomas.maclean@gmail.com';
 const recipient = 'thomas.maclean@gmail.com';
 const subject = 'gitbot says hello!';
-
-const verify = req => {
-    const secret = process.env.GITWEBHOOKSECRET;
-    const payload = JSON.stringify(req.body);
-    const signature = req.headers['X-Hub-Signature'];
-
-    const computedSignature = `sha1=${crypto
-        .createHmac('sha1', secret)
-        .update(payload)
-        .digest('hex')}`;
-    return crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(computedSignature));
-};
 
 const sendEmail = req => {
     let msg = '';
@@ -83,15 +70,20 @@ const setBody = PR => {
             console.log(err);
         });
 };
+
 api.get('/ping', () => {
     return 'pong';
 });
 
 api.post('/webhook', req => {
+    console.log('start');
+
     if (!verify(req)) {
         console.log('NOT SIGNED!');
         return;
     }
+    console.log('got by verify');
+
     if (req.body.action !== 'opened') {
         console.log(`this is a ${req.body.action}, not a new PR... will shut down`);
         return;

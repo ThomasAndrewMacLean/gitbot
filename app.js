@@ -22,11 +22,17 @@ api.get('/ping', () => {
     return 'pong';
 });
 api.get('/test', req => {
-    return verify(req.headers['x-hub-signature'], req.body, process.env.GITWEBHOOKSECRET);
+    return verify(
+        req.headers['x-hub-signature'],
+        JSON.stringify(req.body),
+        process.env.GITWEBHOOKSECRET
+    );
 });
 
 api.post('/webhook', req => {
-    if (!verify(req.headers['x-hub-signature'], req.body, process.env.GITWEBHOOKSECRET)) {
+    if (
+        !verify(req.headers['x-hub-signature'], JSON.stringify(req.body), process.env.GITWEBHOOKSECRET)
+    ) {
         console.log('NOT SIGNED!');
         return;
     }

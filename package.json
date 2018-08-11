@@ -30,6 +30,7 @@
         "aws-sdk": "^2.289.0",
         "claudia-api-builder": "^4.1.1",
         "crypto": "^1.0.1",
-        "node-fetch": "^2.2.0"
+        "node-fetch": "^2.2.0",
+        "verify-github-webhook": "^1.0.1"
     }
 }

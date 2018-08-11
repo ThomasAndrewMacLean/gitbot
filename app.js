@@ -1,7 +1,7 @@
 const ApiBuilder = require('claudia-api-builder');
 const AWS = require('aws-sdk');
 const fetch = require('node-fetch');
-const crypto = require('crypto');
+const verifyGithubWebhook = require('verify-github-webhook');
 
 const api = new ApiBuilder();
 const SES = new AWS.SES();
@@ -10,19 +10,11 @@ const sender = 'thomas.maclean@gmail.com';
 const recipient = 'thomas.maclean@gmail.com';
 const subject = 'gitbot says hello!';
 
-const verify = (signature, payload, secret) => {
-    const computedSignature = `sha1=${crypto
-        .createHmac('sha1', secret)
-        .update(payload)
-        .digest('hex')}`;
-    return crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(computedSignature));
-};
-
 api.get('/ping', () => {
     return 'pong';
 });
 api.get('/test', req => {
-    return verify(
+    return verifyGithubWebhook(
         req.headers['x-hub-signature'],
         JSON.stringify(req.body),
         process.env.GITWEBHOOKSECRET
@@ -30,8 +22,14 @@ api.get('/test', req => {
 });
 
 api.post('/webhook', req => {
+    console.log(req.headers['x-hub-signature']);
+    console.log(process.env.GITWEBHOOKSECRET);
     if (
-        !verify(req.headers['x-hub-signature'], JSON.stringify(req.body), process.env.GITWEBHOOKSECRET)
+        !verifyGithubWebhook(
+            req.headers['x-hub-signature'],
+            JSON.stringify(req.body),
+            process.env.GITWEBHOOKSECRET
+        )
     ) {
         console.log('NOT SIGNED!');
         return;

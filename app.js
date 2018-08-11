@@ -1,6 +1,7 @@
 const ApiBuilder = require('claudia-api-builder');
 const AWS = require('aws-sdk');
 const fetch = require('node-fetch');
+const crypto = require('crypto');
 
 const api = new ApiBuilder();
 const SES = new AWS.SES();
@@ -9,11 +10,26 @@ const sender = 'thomas.maclean@gmail.com';
 const recipient = 'thomas.maclean@gmail.com';
 const subject = 'gitbot says hello!';
 
-api.get('/ping', function() {
+const verify = (signature, payload, secret) => {
+    const computedSignature = `sha1=${crypto
+        .createHmac('sha1', secret)
+        .update(payload)
+        .digest('hex')}`;
+    return crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(computedSignature));
+};
+
+api.get('/ping', () => {
     return 'pong';
 });
+api.get('/test', req => {
+    return verify(req.headers['x-hub-signature'], req.body, process.env.GITWEBHOOKSECRET);
+});
 
-api.post('/webhook', function(req) {
+api.post('/webhook', req => {
+    if (!verify(req.headers['x-hub-signature'], req.body, process.env.GITWEBHOOKSECRET)) {
+        console.log('NOT SIGNED!');
+        return;
+    }
     if (req.body.action !== 'opened') {
         console.log(`this is a ${req.body.action}, not a new PR... will shut down`);
         return;

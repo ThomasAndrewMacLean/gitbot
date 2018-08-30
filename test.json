@@ -11,6 +11,7 @@
         "issue_url": "https://api.github.com/repos/ThomasAndrewMacLean/gitbot/issues/1",
         "number": 1,
         "state": "open",
+        
         "locked": false,
         "title": "titel of my PR: commit to testbranch",
         "user": {

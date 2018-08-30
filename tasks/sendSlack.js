@@ -18,6 +18,7 @@ const sendSlack = PR => {
                 method: 'POST',
                 body: JSON.stringify({
                     text: `new pull request to be reviewed!!! PR: ${PR.title}`
+                    
                 }),
                 headers: {
                     'Content-Type': 'application/json'

@@ -3,23 +3,12 @@ const verify = require('./security/verify');
 const sendEmail = require('./tasks/sendEmail');
 const setLabels = require('./tasks/setLabels');
 const sendSlack = require('./tasks/sendSlack');
+const sendSlack2 = require('./tasks/sendSlack2');
 const setBody = require('./tasks/setBody');
-const db = require('monk')(
-    `mongodb://dbreadwrite:${
-        process.env.MONGO_PW
-    }@ds139992.mlab.com:39992/gitbot`
-);
-const users = db.get('users');
 const api = new ApiBuilder();
 
 api.get('/ping', () => {
     return 'pong!';
-});
-
-api.get('/test', () => {
-    return users.find({ email: 'thomas.maclean@marlon.be' }).then(user => {
-        return { user };
-    });
 });
 
 api.post('/webhook', req => {
@@ -35,7 +24,8 @@ api.post('/webhook', req => {
         sendEmail(req),
         setLabels(PR),
         setBody(PR),
-        sendSlack(PR)
+        sendSlack(PR),
+        sendSlack2(PR)
     ]);
 });
 

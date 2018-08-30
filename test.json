@@ -1,7 +1,6 @@
 {
     "action": "opened",
     "number": 1,
-    
     "pull_request": {
         "url": "https://api.github.com/repos/ThomasAndrewMacLean/gitbot/pulls/1",
         "id": 207440933,

@@ -4,5 +4,6 @@ node_js:
 cache:
   directories:
     - "node_modules" # This will tell Travis CI to cache the dependencies
-script: yarn install
-  yarn deploy-travis # Here you could also run the build step of your application
+script:
+  - yarn install
+  - yarn deploy-travis # Here you could also run the build step of your application

@@ -8,7 +8,7 @@ const setBody = require('./tasks/setBody');
 const api = new ApiBuilder();
 
 api.get('/ping', () => {
-    return 'pong';
+    return 'pong!';
 });
 
 api.post('/webhook', req => {

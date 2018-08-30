@@ -15,6 +15,8 @@ const sendSlack = PR => {
             email: 'thomas.maclean@marlon.be'
         })
         .then(user => {
+            console.log('USEEERRR');
+
             console.log(user);
 
             return fetch(user.slack, {

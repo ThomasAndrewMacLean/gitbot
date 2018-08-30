@@ -17,7 +17,9 @@ api.get('/ping', () => {
 });
 
 api.get('/test', () => {
-    users.find({ email: 'thomas.maclean@marlon.be' }).then(user => user);
+    users.find({ email: 'thomas.maclean@marlon.be' }).then(user => {
+        return { test: true, user: user };
+    });
 });
 
 api.post('/webhook', req => {

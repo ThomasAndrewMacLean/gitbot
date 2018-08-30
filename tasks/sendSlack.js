@@ -10,7 +10,7 @@ const sendSlack = PR => {
     console.log('GETTING SLACK 🤖');
 
     //GET SLACKURL FROM PR
-    return users
+    users
         .find({
             email: 'thomas.maclean@marlon.be'
         })

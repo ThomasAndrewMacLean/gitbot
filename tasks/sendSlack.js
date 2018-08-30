@@ -9,7 +9,7 @@ const users = db.get('users');
 const sendSlack = PR => {
     //GET SLACKURL FROM PR
 
-    users
+    return users
         .find({
             email: 'thomas.maclean@marlon.be'
         })
@@ -18,7 +18,7 @@ const sendSlack = PR => {
                 method: 'POST',
                 body: JSON.stringify({
                     text: `new pull request to be reviewed!!! PR: ${PR.title}`
-                    
+
                 }),
                 headers: {
                     'Content-Type': 'application/json'

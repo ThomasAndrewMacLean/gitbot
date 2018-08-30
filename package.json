@@ -9,7 +9,6 @@
         "deploy-travis": "claudia update --set-env GITWEBHOOKSECRET=$GITWEBHOOKSECRET,GITHUBTOKEN=$GITHUBTOKEN",
         "log": "smoketail -f /aws/lambda/gitbot -r eu-west-1",
         "test": "echo \"Error: no test specified\" && exit 1"
-
     },
     "repository": {
         "type": "git",
@@ -31,6 +30,7 @@
         "aws-sdk": "^2.289.0",
         "claudia-api-builder": "^4.1.1",
         "crypto": "^1.0.1",
+        "monk": "^6.0.6",
         "node-fetch": "^2.2.0"
     }
 }

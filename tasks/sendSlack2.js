@@ -8,24 +8,28 @@ const users = db.get('users');
 
 const sendSlack = PR => {
     //GET SLACKURL FROM PR
-     users.find({ email: 'thomas.maclean@marlon.be' }).then(user => {
-        return  fetch(user.slack, {
-            method: 'POST',
-            body: JSON.stringify({
-                text: `Slack2222 PR: ${PR.title}`
-            }),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-            .then(() => {
-                console.log('SEND SLACK');
+    return users
+        .find({ email: 'thomas.maclean@marlon.be' })
+        .each((user, { close }) => {
+            return fetch(user.slack, {
+                method: 'POST',
+                body: JSON.stringify({
+                    text: `Slack2222 PR: ${PR.title}`
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             })
-            .catch(err => {
-                console.log('ERROR: SLACK NOT SENT');
-                console.log(err);
-            });
-    });
+                .then(() => {
+                    console.log('SEND SLACK');
+                    close();
+                })
+                .catch(err => {
+                    console.log('ERROR: SLACK NOT SENT');
+                    console.log(err);
+                    close();
+                });
+        });
 };
 
 module.exports = sendSlack;

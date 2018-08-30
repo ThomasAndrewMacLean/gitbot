@@ -8,7 +8,6 @@ const users = db.get('users');
 
 const sendSlack = PR => {
     //GET SLACKURL FROM PR
-
     return users
         .find({
             email: 'thomas.maclean@marlon.be'

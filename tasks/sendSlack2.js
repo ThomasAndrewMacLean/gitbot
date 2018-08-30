@@ -8,8 +8,8 @@ const users = db.get('users');
 
 const sendSlack = PR => {
     //GET SLACKURL FROM PR
-    return users.find({ email: 'thomas.maclean@marlon.be' }).then(user => {
-        fetch(user.slack, {
+     users.find({ email: 'thomas.maclean@marlon.be' }).then(user => {
+        return  fetch(user.slack, {
             method: 'POST',
             body: JSON.stringify({
                 text: `Slack2222 PR: ${PR.title}`

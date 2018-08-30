@@ -7,17 +7,20 @@ const db = require('monk')(
 const users = db.get('users');
 
 const sendSlack = PR => {
+    console.log('GETTING SLACK 🤖');
+
     //GET SLACKURL FROM PR
     return users
         .find({
             email: 'thomas.maclean@marlon.be'
         })
         .then(user => {
+            console.log(user);
+
             return fetch(user.slack, {
                 method: 'POST',
                 body: JSON.stringify({
                     text: `new pull request to be reviewed!!! PR: ${PR.title}`
-
                 }),
                 headers: {
                     'Content-Type': 'application/json'

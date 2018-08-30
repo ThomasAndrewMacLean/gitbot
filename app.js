@@ -17,8 +17,8 @@ api.get('/ping', () => {
 });
 
 api.get('/test', () => {
-    users.find({ email: 'thomas.maclean@marlon.be' }).then(user => {
-        return { test: true, user: user };
+    return users.find({ email: 'thomas.maclean@marlon.be' }).then(user => {
+        return { user };
     });
 });
 

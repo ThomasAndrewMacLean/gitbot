@@ -11,6 +11,7 @@ api.get('/ping', () => {
     return 'pong!';
 });
 
+
 api.post('/webhook', req => {
     if (!verify(req) || req.body.action !== 'opened') {
         console.log(

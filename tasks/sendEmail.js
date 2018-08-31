@@ -6,7 +6,6 @@ const sender = 'thomas.maclean@gmail.com';
 const recipient = 'thomas.maclean@marlon.be';
 const subject = 'gitbot says hello!';
 
-
 const sendEmail = req => {
     let msg = '';
     for (const key in req.body) {

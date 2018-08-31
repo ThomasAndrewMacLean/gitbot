@@ -3,14 +3,12 @@ const verify = require('./security/verify');
 const sendEmail = require('./tasks/sendEmail');
 const setLabels = require('./tasks/setLabels');
 const sendSlack = require('./tasks/sendSlack');
-const sendSlack2 = require('./tasks/sendSlack2');
 const setBody = require('./tasks/setBody');
 const api = new ApiBuilder();
 
 api.get('/ping', () => {
     return 'pong!';
 });
-
 
 api.post('/webhook', req => {
     if (!verify(req) || req.body.action !== 'opened') {
@@ -26,7 +24,6 @@ api.post('/webhook', req => {
         setLabels(PR),
         setBody(PR),
         sendSlack(PR),
-        sendSlack2(PR)
     ]);
 });
 

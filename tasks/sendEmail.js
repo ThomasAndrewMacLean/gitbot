@@ -3,7 +3,7 @@ const AWS = require('aws-sdk');
 const SES = new AWS.SES();
 
 const sender = 'thomas.maclean@gmail.com';
-const recipient = 'thomas.maclean@gmail.com';
+const recipient = 'thomas.maclean@marlon.be';
 const subject = 'gitbot says hello!';
 
 

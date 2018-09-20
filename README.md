@@ -1,5 +1,7 @@
 # gitbot
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/ThomasAndrewMacLean/gitbot.svg)](https://greenkeeper.io/)
+
 ### howto
 
 - install all dependecies with yarn install

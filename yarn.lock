@@ -38,9 +38,23 @@ async@^2.0.0:
   dependencies:
     lodash "^4.17.10"
 
-aws-sdk@^2.2.14, aws-sdk@^2.251.1, aws-sdk@^2.289.0:
+aws-sdk@^2.2.14, aws-sdk@^2.251.1:
   version "2.289.0"
   resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.289.0.tgz#8921765288526db81d7fe0bda5dba3e29c15218e"
+  dependencies:
+    buffer "4.9.1"
+    events "1.1.1"
+    ieee754 "1.1.8"
+    jmespath "0.15.0"
+    querystring "0.2.0"
+    sax "1.2.1"
+    url "0.10.3"
+    uuid "3.1.0"
+    xml2js "0.4.19"
+
+aws-sdk@^2.358.0:
+  version "2.358.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.358.0.tgz#d2b0449711640f764029c35381d1a6ebdeababe9"
   dependencies:
     buffer "4.9.1"
     events "1.1.1"

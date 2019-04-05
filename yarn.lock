@@ -587,9 +587,10 @@ sequential-promise-map@^1.0.0:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/sequential-promise-map/-/sequential-promise-map-1.0.4.tgz#ebe4a5c8f985e720dc8f2055545a76c78c451b05"
 
-smoketail@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/smoketail/-/smoketail-0.1.1.tgz#f112451f41bc08243e1e630b9750e10b1e954409"
+smoketail@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/smoketail/-/smoketail-0.2.1.tgz#1ba8c2d90c50c9af9a2edcebf07025b461e6436c"
+  integrity sha512-kd+0ye8RkbZPYqSabd9oKPUdPjc92lmY4Lsk+S2022VlX6RADlwGZeRRzplpZZ78lv15mfEnbDaU96qFAmVWPw==
   dependencies:
     aws-sdk "^2.2.14"
     commander "~2.9.0"

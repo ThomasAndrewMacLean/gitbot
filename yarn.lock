@@ -482,9 +482,10 @@ peek-stream@^1.1.0:
     duplexify "^3.5.0"
     through2 "^2.0.3"
 
-prettier@^1.14.2:
-  version "1.14.2"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.14.2.tgz#0ac1c6e1a90baa22a62925f41963c841983282f9"
+prettier@^1.18.1:
+  version "1.18.1"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.18.1.tgz#2c79bdc97cbd457fc56e2f37c91cf076d69a8e07"
+  integrity sha512-cO2Lm9UuFJHhNgHSChbFddQEzNPP+sA6fX1tGmC0VNqTc2X+7EH0gpGWdEX0HfCe5+NVyOyyyWUpLKsb8LU5vg==
 
 process-nextick-args@~1.0.6:
   version "1.0.7"

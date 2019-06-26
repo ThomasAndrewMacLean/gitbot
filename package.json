@@ -22,7 +22,7 @@
     "homepage": "https://github.com/ThomasAndrewMacLean/gitbot#readme",
     "devDependencies": {
         "claudia": "^5.1.0",
-        "husky": "^0.14.3",
+        "husky": "^2.6.0",
         "prettier": "^1.14.2",
         "smoketail": "^0.1.1"
     },
